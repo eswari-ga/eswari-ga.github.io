@@ -3,8 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Feedback Form</title>
+    <title>Customer Insights Form</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #D22B2B;
+            text-align: center; /* Align the heading to center */
+        }
+
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group label {
+            display: block;
+        }
+
+        .radio-group {
+            margin-bottom: 15px;
+        }
+
+        .radio-group label {
+            margin-right: 10px;
+        }
+
+        #submit_button {
+            background-color: #D22B2B;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #submit_button:hover {
+            background-color: #008000;
+        }
+
         .feedback-text {
             color: grey;
             font-size: 14px;
@@ -14,9 +82,8 @@
             display: none;
         }
 
-        .blue-button {
-            background-color: blue;
-            color: white;
+        .center-button {
+            text-align: center; /* Aligns the button to the center */
         }
     </style>
     <script>
@@ -70,7 +137,7 @@
     </script>
 </head>
 <body>
-    <h1>Customer Feedback Form</h1>
+    <h1>USER Experience Customer Insights</h1>
     <form id="feedback_form" action="submit_feedback.php" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
@@ -86,16 +153,16 @@
 
         <h4>Which services are you interested in/looking for? :</h4>
         <input type="checkbox" id="ux_consulting" name="services[]" value="UX Consulting">
-        <label for="ux_consulting">UX Consulting</label><br>
+        <label for="ux_consulting" style="font-weight: normal;">UX Consulting</label><br>
 
         <input type="checkbox" id="training" name="services[]" value="Training">
-        <label for="training">Training</label><br>
+        <label for="training" style="font-weight: normal;">Training</label><br>
 
         <input type="checkbox" id="digital_transformation" name="services[]" value="Digital Transformation">
-        <label for="digital_transformation">Digital Transformation</label><br>
+        <label for="digital_transformation" style="font-weight: normal;">Digital Transformation</label><br>
 
         <input type="checkbox" id="agile_teams" name="services[]" value="Agile Teams Empowerment">
-        <label for="agile_teams">Agile Teams Empowerment</label><br><br>
+        <label for="agile_teams" style="font-weight: normal;">Agile Teams Empowerment</label><br><br>
 
         <h4>Which industry are you from/interested in?</h4>
         <select id="industry" name="industry">
@@ -158,8 +225,9 @@
         <p id="text_below_textarea" class="feedback-text"></p><br><br>
 
         <!-- Add more questions as needed -->
-
-        <input type="submit" id="submit_button" class="blue-button" value="Submit">
+        <div class="center-button">
+            <input type="submit" id="submit_button" class="blue-button" value="SUBMIT">
+        </div>
     </form>
     <script>
         // Listen for changes in radio button selections
