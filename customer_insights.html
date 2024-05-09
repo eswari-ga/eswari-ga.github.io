@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Form</title>
+    <style>
+        .feedback-text {
+            color: grey;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .blue-button {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+    <script>
+        function toggleTextareaVisibility() {
+            var navigation = document.querySelector('input[name="navigation"]:checked');
+            var easy_to_understand = document.querySelector('input[name="easy_to_understand"]:checked');
+            var services = document.querySelector('input[name="services"]:checked');
+            var delivery = document.querySelector('input[name="delivery"]:checked');
+            var customerService = document.querySelector('input[name="customer_service"]:checked');
+            var textarea = document.getElementById('improvement_text');
+
+            if (navigation && easy_to_understand && services && delivery && customerService) {
+                textarea.classList.remove('hidden');
+            } else {
+                textarea.classList.add('hidden');
+            }
+        }
+
+        function toggleImprovementQuestion() {
+            var dissatisfactionLevels = ['Neutral', 'Unsatisfied', 'Very Unsatisfied'];
+            var navigation = document.querySelector('input[name="navigation"]:checked').value;
+            var easy_to_understand = document.querySelector('input[name="easy_to_understand"]:checked').value;
+            var services = document.querySelector('input[name="services"]:checked').value;
+            var delivery = document.querySelector('input[name="delivery"]:checked').value;
+            var customerService = document.querySelector('input[name="customer_service"]:checked').value;
+
+            var improvementQuestion = document.getElementById('improvement_question');
+            var textBelowTextarea = document.getElementById('text_below_textarea');
+
+            // Check if any of the checked values are in the dissatisfactionLevels array
+            if (dissatisfactionLevels.includes(navigation) || dissatisfactionLevels.includes(easy_to_understand) || 
+                dissatisfactionLevels.includes(services) || dissatisfactionLevels.includes(delivery) || 
+                dissatisfactionLevels.includes(customerService)) {
+                improvementQuestion.innerText = "How can we improve?";
+                textBelowTextarea.innerText = "We're sorry you did not have an overall good experience. Please let us know how we can do better.";
+            } else {
+                improvementQuestion.innerText = "How can we do even better?";
+                textBelowTextarea.innerText = "Thanks for your rating! Please let us know what we can do to make your experience even better.";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('submit_button').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                document.getElementById('feedback_form').reset();
+                var textarea = document.getElementById('improvement_text');
+                textarea.classList.add('hidden');
+                document.getElementById('text_below_textarea').innerText = '';
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Customer Feedback Form</h1>
+    <form id="feedback_form" action="submit_feedback.php" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="company">Company/Organization:</label>
+        <input type="text" id="company" name="company"><br><br>
+
+        <label for="position">Position/Role:</label>
+        <input type="text" id="position" name="position"><br><br>
+
+        <h4>Which services are you interested in/looking for? :</h4>
+        <input type="checkbox" id="ux_consulting" name="services[]" value="UX Consulting">
+        <label for="ux_consulting">UX Consulting</label><br>
+
+        <input type="checkbox" id="training" name="services[]" value="Training">
+        <label for="training">Training</label><br>
+
+        <input type="checkbox" id="digital_transformation" name="services[]" value="Digital Transformation">
+        <label for="digital_transformation">Digital Transformation</label><br>
+
+        <input type="checkbox" id="agile_teams" name="services[]" value="Agile Teams Empowerment">
+        <label for="agile_teams">Agile Teams Empowerment</label><br><br>
+
+        <h4>Which industry are you from/interested in?</h4>
+        <select id="industry" name="industry">
+            <option value="Public Services">Public Services</option>
+            <option value="Education">Education</option>
+            <option value="Finance">Finance</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Health Care">Health Care</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Logistics">Logistics</option>
+            <option value="Software and Platforms">Software and Platforms</option>
+            <option value="Energy">Energy</option>
+            <option value="Communications and Media">Communications and Media</option>
+        </select><br><br>
+
+        <h4><label for="information">Briefly share with us, what information were you looking for?</label></h4>
+        <textarea id="information" name="information" rows="4" cols="50"></textarea><br><br>
+
+        <h4>How do you rate our website?</h4>
+        <label for="navigation">Website Navigation:</label><br><br>
+        <input type="radio" id="navigation" name="navigation" value="Very Unsatisfied">Very Unsatisfied
+        <input type="radio" id="navigation" name="navigation" value="Unsatisfied">Unsatisfied
+        <input type="radio" id="navigation" name="navigation" value="Neutral">Neutral
+        <input type="radio" id="navigation" name="navigation" value="Satisfied">Satisfied
+        <input type="radio" id="navigation" name="navigation" value="Very Satisfied">Very Satisfied<br><br>
+
+        <label for="navigation">Easy to Understand:</label><br><br>
+        <input type="radio" id="easy_to_understand" name="easy_to_understand" value="Very Unsatisfied">Very Unsatisfied
+        <input type="radio" id="easy_to_understand" name="easy_to_understand" value="Unsatisfied">Unsatisfied
+        <input type="radio" id="easy_to_understand" name="easy_to_understand" value="Neutral">Neutral
+        <input type="radio" id="easy_to_understand" name="easy_to_understand" value="Satisfied">Satisfied
+        <input type="radio" id="easy_to_understand" name="easy_to_understand" value="Very Satisfied">Very Satisfied<br><br>
+
+        <h4>How are you satisfied with:</h4>
+
+        <label for="services">Services:</label><br><br>
+        <input type="radio" id="services" name="services" value="Very Unsatisfied">Very Unsatisfied
+        <input type="radio" id="services" name="services" value="Unsatisfied">Unsatisfied
+        <input type="radio" id="services" name="services" value="Neutral">Neutral
+        <input type="radio" id="services" name="services" value="Satisfied">Satisfied
+        <input type="radio" id="services" name="services" value="Very Satisfied">Very Satisfied<br><br>
+
+        <label for="services">Delivery:</label><br><br>
+        <input type="radio" id="delivery" name="delivery" value="Very Unsatisfied">Very Unsatisfied
+        <input type="radio" id="delivery" name="delivery" value="Unsatisfied">Unsatisfied
+        <input type="radio" id="delivery" name="delivery" value="Neutral">Neutral
+        <input type="radio" id="delivery" name="delivery" value="Satisfied">Satisfied
+        <input type="radio" id="delivery" name="delivery" value="Very Satisfied">Very Satisfied<br><br>
+
+        <label for="customer_service">Customer Service:</label><br><br>
+        <input type="radio" id="customer_service" name="customer_service" value="Very Unsatisfied">Very Unsatisfied
+        <input type="radio" id="customer_service" name="customer_service" value="Unsatisfied">Unsatisfied
+        <input type="radio" id="customer_service" name="customer_service" value="Neutral">Neutral
+        <input type="radio" id="customer_service" name="customer_service" value="Satisfied">Satisfied
+        <input type="radio" id="customer_service" name="customer_service" value="Very Satisfied">Very Satisfied<br><br>
+
+        <div id="improvement_question"></div>
+        <textarea id="improvement_text" name="improvement_text" class="hidden"></textarea>
+
+        <p id="text_below_textarea" class="feedback-text"></p><br><br>
+
+        <!-- Add more questions as needed -->
+
+        <input type="submit" id="submit_button" class="blue-button" value="Submit">
+    </form>
+    <script>
+        // Listen for changes in radio button selections
+        document.addEventListener('change', function(event) {
+            if (event.target.matches('input[type="radio"]')) {
+                toggleTextareaVisibility();
+                toggleImprovementQuestion();
+            }
+        });
+    </script>
+</body>
+</html>
